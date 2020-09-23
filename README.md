@@ -20,19 +20,21 @@ For detailed prequisites to install OP-Tools, please refer to https://developers
 
 - For Windows 10 64-bit (x86_64)
 
-Copy the jniortools.dll from lib folder into C:\Windows\System32.
-cd into the lib directory.
-Run "mvn install:install-file -Dfile=com.google.ortools.jar -DgroupId=com.google.ortools -DartifactId=com-google-ortools -Dversion=7.8.7959 -Dpackaging=jar" and "mvn install:install-file -Dfile=protobuf.jar -DgroupId=com.google.ortools -DartifactId=protobuf -Dversion=7.8.7959 -Dpackaging=jar"
-Run mvn exec:java -Dexec.mainClass="Main" to perform simulation.
+1. Download the OR-Tools library for java(https://developers.google.com/optimization/install/java/windows) and unzip the fold named as "lib" under this project.
+2. Copy the jniortools.dll from lib folder into C:\Windows\System32.
+3. cd into the lib directory.
+4. Run "mvn install:install-file -Dfile=com.google.ortools.jar -DgroupId=com.google.ortools -DartifactId=com-google-ortools -Dversion=7.8.7959 -Dpackaging=jar" and "mvn install:install-file -Dfile=protobuf.jar -DgroupId=com.google.ortools -DartifactId=protobuf -Dversion=7.8.7959 -Dpackaging=jar"
+5. Run mvn exec:java -Dexec.mainClass="Main" to perform simulation.
 
-   If you have some preblems in building the project in intellij, please refer to: https://stackoverflow.com/questions/58819070/google-or-tools-in-intellij-unsatisfiedlinkerror.
+If you have some preblems in building the project in intellij, please refer to: https://stackoverflow.com/questions/58819070/google-or-tools-in-intellij-unsatisfiedlinkerror.
 
 - For Linux ubuntu-20.04 64 -bit
 
-Copy all the files from ubuntu-lib folder into "/user/lib/";
-Run "mvn install:install-file -Dfile=./ubuntu-lib/com.google.ortools.jar -DgroupId=com.google.ortools -DartifactId=com-google-ortools -Dversion=7.8.7959 -Dpackaging=jar";
-Run "mvn install:install-file -Dfile=./ubuntu-lib/protobuf.jar -DgroupId=com.google.ortools -DartifactId=protobuf -Dversion=7.8.7959 -Dpackaging=jar";
-Run mvn exec:java -Dexec.mainClass="Main" to perform simulation.
+1. Download the OR-Tools library for java(https://developers.google.com/optimization/install/java/linux) and unzip the fold named as "ubuntu-lib" under this project;
+2. Copy all the files from ubuntu-lib folder into "/user/lib/";
+3. Run "mvn install:install-file -Dfile=./ubuntu-lib/com.google.ortools.jar -DgroupId=com.google.ortools -DartifactId=com-google-ortools -Dversion=7.8.7959 -Dpackaging=jar";
+4. Run "mvn install:install-file -Dfile=./ubuntu-lib/protobuf.jar -DgroupId=com.google.ortools -DartifactId=protobuf -Dversion=7.8.7959 -Dpackaging=jar";
+5. Run mvn exec:java -Dexec.mainClass="Main" to perform simulation.
 
 
 ## Result
