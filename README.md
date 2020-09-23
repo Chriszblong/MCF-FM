@@ -50,7 +50,3 @@ total number of abortions: 24
 total number of searches: 236267  
 ```   
 
-=======
-# An Effective Fleet Management Strategy for Collaborative Spatio-Temporal Searching (GIS Cup)
->>>>>>> f879424041d851e6feb443f32550db14540a9d5a
-
