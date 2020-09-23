@@ -1,6 +1,4 @@
-# MCF-FM
-# Champion's Solution to SIGSPATIAL GIS CUP 2020 (MCF-FM)
-An Effective Fleet Management Strategy for Collaborative Spatio-Temporal Searching (GIS Cup)
+# An Effective Fleet Management Strategy for Collaborative Spatio-Temporal Searching (GIS Cup)
 
 ## Brief description
 We first use the Uber H3 library (https://github.com/uber/h3-java) to divide the space into several hexagon regions. Then we employ a deep convolutional network model to predict future pickup and dropoff event number in each region. Given the predicted values, we calculate the region weight for each region and guide idle agents to nearby location in their k neighbor layers according to the weight. To get a more accurate travel time estimate, we use a multilayer perceptron (MLP) to predict the dynamic travel speeds of agents, which is important for assignment strategy. Furthermore, in order to promote collaboration between agents, we collect the real-time information of all idle agents in every time interval and reschedule these agents together. Specifically, we model the fleet management as a Minimum Cost Flow problem and solve it with Google OR-Tools (https://developers.google.com/optimization). Finally, we replace the nearest greedy order dispatch straetgy with a serial dispatch strategy, i.e. resources can be assigned to agents in service.
