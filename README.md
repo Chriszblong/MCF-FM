@@ -1,6 +1,5 @@
 # An Effective Fleet Management Strategy for Collaborative Spatio-Temporal Searching (GIS Cup)
 
-## Description
 This is a submittion called MCF-FM to [ACM SIGSPATIAL GIS CUP 2020](https://sigspatial2020.sigspatial.org/giscup2020/home)
 
 ## Brief description
@@ -15,7 +14,9 @@ We first use the [Uber H3 library](https://github.com/uber/h3-java) to divide th
 
 ## Prerequisites
 Java 8 or up
+
 For Windows 10 64-bit (x86_64), [Microsoft Visual C++ Redistributable for Visual Studio 2019](https://visualstudio.microsoft.com/zh-hans/downloads/?q=Visual+C%2B%2B+Redistributable+for+Visual+Studio) must be installed, since OR-Tools library for Java is a wrapper for the C++ native library.
+
 For detailed prequisites to install OR-Tools, please refer to https://developers.google.com/optimization/install.
 
 
