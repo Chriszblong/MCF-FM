@@ -56,3 +56,5 @@ total number of abortions: 24
 total number of searches: 236267  
 ```   
 
+If you use our code, please remember to cite the following paper:
+Lingfeng Ming, Qi Hu, Ming Dong, Bolong Zheng: An Effective Fleet Management Strategy for Collaborative Spatio-Temporal Searching: GIS Cup. SIGSPATIAL/GIS 2020: 651-654.
