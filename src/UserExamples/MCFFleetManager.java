@@ -43,7 +43,7 @@ public class MCFFleetManager extends FleetManager {
         availableAgent.add(agentId);
         agentStartSearchTime.put(agentId, time);
 
-        addAgentToRegion(agentId, time);
+        addAgentToRegion(agentId, currentLoc);
     }
 
 
@@ -62,7 +62,7 @@ public class MCFFleetManager extends FleetManager {
                 action = AgentAction.assignTo(assignedAgent, resource.id);
 
                 // remove from region
-                removeAgentFromRegion(assignedAgent, time);
+                removeAgentFromRegion(assignedAgent);
             } else {
                 waitingResources.add(resource);
                 addResourceToRegion(resource);
@@ -102,7 +102,7 @@ public class MCFFleetManager extends FleetManager {
                 action = AgentAction.assignTo(resource.assignedAgentId, bestResource.id);
             } else {
                 availableAgent.add(resource.assignedAgentId);
-                addAgentToRegion(resource.assignedAgentId, time);
+                addAgentToRegion(resource.assignedAgentId, currentLoc);
                 agentStartSearchTime.put(resource.assignedAgentId, time);
                 action = AgentAction.doNothing();
             }
@@ -117,7 +117,7 @@ public class MCFFleetManager extends FleetManager {
             if (resource.assignedAgentId != -1) {
                 agentRoutes.put(resource.assignedAgentId, new LinkedList<>());
                 availableAgent.add(resource.assignedAgentId);
-                addAgentToRegion(resource.assignedAgentId, time);
+                addAgentToRegion(resource.assignedAgentId, currentLoc);
                 agentStartSearchTime.put(resource.assignedAgentId, time);
                 resourceAssignment.remove(resource.assignedAgentId);
             }
@@ -136,11 +136,13 @@ public class MCFFleetManager extends FleetManager {
         }
 
         LocationOnRoad lastLoc = agentLastLocation.get(agentId);
-        String lastAddr = h3.geoToH3Address(lastLoc.road.from.latitude, lastLoc.road.from.longitude, 8);
-        String currentAddr = h3.geoToH3Address(currentLoc.road.from.latitude, currentLoc.road.from.longitude, 8);
-        if(!lastAddr.equals(currentAddr)){
-            removeAgentFromRegion(agentId, agentLastAppearTime.get(agentId));
-            addAgentToRegion(agentId, time);
+        String lastAddr = h3.geoToH3Address(getLocationLatLon(lastLoc)[0], getLocationLatLon(lastLoc)[1], 8);
+        String currentAddr = h3.geoToH3Address(getLocationLatLon(currentLoc)[0], getLocationLatLon(currentLoc)[1], 8);
+        if(!lastAddr.equals(currentAddr) && availableAgent.contains(agentId)){
+            removeAgentFromRegion(agentId);
+            if (availableAgent.contains(agentId)) {
+                addAgentToRegion(agentId, currentLoc);
+            }
         }
         agentLastAppearTime.put(agentId, time);
 
@@ -292,10 +294,8 @@ public class MCFFleetManager extends FleetManager {
         }
     }
 
-    private void addAgentToRegion(Long agentId, Long time){
-        LocationOnRoad curLoc = getCurrentLocation(agentLastAppearTime.get(agentId), agentLastLocation.get(agentId),
-                time);
-        double[] latLon = getLocationLatLon(curLoc);
+    private void addAgentToRegion(Long agentId, LocationOnRoad currentLoc){
+        double[] latLon = getLocationLatLon(currentLoc);
         String hexAddr = h3.geoToH3Address(latLon[0],
                 latLon[1], 8);
         if(hexAddr2Region.containsKey(hexAddr)){
@@ -304,10 +304,8 @@ public class MCFFleetManager extends FleetManager {
     }
 
 
-    private void removeAgentFromRegion(Long agentId, Long time){
-        LocationOnRoad curLoc = getCurrentLocation(agentLastAppearTime.get(agentId), agentLastLocation.get(agentId),
-                time);
-        double[] latLon = getLocationLatLon(curLoc);
+    private void removeAgentFromRegion(Long agentId){
+        double[] latLon = getLocationLatLon(agentLastLocation.get(agentId));
         String hexAddr = h3.geoToH3Address(latLon[0], latLon[1], 8);
         if(hexAddr2Region.containsKey(hexAddr)){
             regionList.get(hexAddr2Region.get(hexAddr)).availableAgents.remove(agentId);
